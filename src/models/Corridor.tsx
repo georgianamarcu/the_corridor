@@ -21,6 +21,7 @@ type GLTFResults = GLTF & {
     door2Left_2: THREE.Mesh;
     door2Right_1: THREE.Mesh;
     door2Right_2: THREE.Mesh;
+    door11: THREE.Mesh;
   };
   materials: {
     white_bloom: THREE.MeshStandardMaterial;

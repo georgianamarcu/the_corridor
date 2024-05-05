@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { Corridor } from "../models/Corridor";
 // import { OrbitControls } from "@react-three/drei";
 import Lights from "./Lights";
