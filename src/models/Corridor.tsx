@@ -1,9 +1,47 @@
 import { useGLTF } from "@react-three/drei";
+import { GLTF } from "three-stdlib";
+import * as THREE from "three";
+import { Euler, Vector3 } from "@react-three/fiber";
 
-export function Corridor(props) {
-  const { nodes, materials } = useGLTF("/corridor.glb");
+type GLTFResults = GLTF & {
+  nodes: {
+    exteriorStrips_1: THREE.Mesh;
+    exteriorStrips_2: THREE.Mesh;
+    interiorStrips_1: THREE.Mesh;
+    interiorStrips_2: THREE.Mesh;
+    corridorMetal_1: THREE.Mesh;
+    corridorMetal_2: THREE.Mesh;
+    pillars_1: THREE.Mesh;
+    pillars_2: THREE.Mesh;
+    kiosk_screen: THREE.Mesh;
+    kiosk: THREE.Mesh;
+    door_1: THREE.Mesh;
+    door_2: THREE.Mesh;
+    door2Left_1: THREE.Mesh;
+    door2Left_2: THREE.Mesh;
+    door2Right_1: THREE.Mesh;
+    door2Right_2: THREE.Mesh;
+  };
+  materials: {
+    white_bloom: THREE.MeshStandardMaterial;
+    mat2: THREE.MeshStandardMaterial;
+    mat3: THREE.MeshStandardMaterial;
+    bloom: THREE.MeshStandardMaterial;
+    ["kiosk.001"]: THREE.MeshStandardMaterial;
+    metal: THREE.MeshStandardMaterial;
+    bloom1: THREE.MeshStandardMaterial;
+  };
+};
+
+interface CorridorProps {
+  rotation: Euler;
+  position: Vector3;
+}
+
+export function Corridor({ rotation, position }: CorridorProps) {
+  const { nodes, materials } = useGLTF("/corridor.glb") as GLTFResults;
   return (
-    <group {...props} dispose={null}>
+    <group rotation={rotation} position={position} dispose={null}>
       <group position={[-0.673216, -0.283617, -6.375035]}>
         <mesh
           castShadow
