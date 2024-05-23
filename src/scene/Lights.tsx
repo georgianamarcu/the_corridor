@@ -40,6 +40,7 @@ const Lights = () => {
           position={[5, 5, 4]}
           onUpdate={(self) => self.lookAt(0, 0, 0)}
         />
+        {/* Ceiling */}
       </Environment>
     </>
   );
