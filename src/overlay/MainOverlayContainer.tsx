@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import * as echarts from "echarts";
 
@@ -6,7 +6,7 @@ interface HealthContainerProps {
   $active: boolean;
 }
 
-const MainOverlayContainer: React.FC = () => {
+const MainOverlayContainer = () => {
   useEffect(() => {
     const chartDom = document.getElementById("gauge");
     const myChart = echarts.init(chartDom);

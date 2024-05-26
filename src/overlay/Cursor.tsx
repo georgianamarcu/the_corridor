@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-const Cursor: React.FC = () => {
+const Cursor = () => {
   //   const color = "rgba(0, 255, 255, 0.5)";
   return <CursorContainer></CursorContainer>;
 };

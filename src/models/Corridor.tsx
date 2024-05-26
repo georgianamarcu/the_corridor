@@ -45,7 +45,7 @@ interface CorridorProps {
   position: Vector3;
 }
 
-export function Corridor({ rotation, position }: CorridorProps): React.FC {
+export function Corridor({ rotation, position }: CorridorProps) {
   const { nodes, materials } = useGLTF("/corridor.glb") as GLTFResults;
 
   materials.mat3.envMapIntensity = 2;

@@ -4,9 +4,8 @@ import Scene from "./scene/Scene";
 import { KeyboardControls } from "@react-three/drei";
 // import { Perf } from "r3f-perf";
 // import Cursor from "./overlay/Cursor";
-import React from "react";
 
-function App(): React.FC {
+function App() {
   return (
     <>
       <MainOverlayContainer />
