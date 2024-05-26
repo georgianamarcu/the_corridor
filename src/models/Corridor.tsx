@@ -2,7 +2,6 @@ import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import * as THREE from "three";
 import { Euler, Vector3 } from "@react-three/fiber";
-import { RigidBody } from "@react-three/rapier";
 
 type GLTFResults = GLTF & {
   nodes: {
@@ -42,108 +41,121 @@ interface CorridorProps {
 
 export function Corridor({ rotation, position }: CorridorProps) {
   const { nodes, materials } = useGLTF("/corridor.glb") as GLTFResults;
-  materials.mat3.envMapIntensity = 1.2;
-  materials.mat2.envMapIntensity = 1;
+
+  materials.mat3.envMapIntensity = 2;
+  materials.mat2.envMapIntensity = 2;
+  materials.bloom1.emissiveIntensity = 8;
+  materials.bloom1.toneMapped = false;
+  materials.bloom.emissiveIntensity = 6;
+  materials.bloom.toneMapped = false;
+
   return (
-    <RigidBody type="fixed" restitution={0.2} friction={0}>
-      <group rotation={rotation} position={position} dispose={null}>
-        <group position={[-0.673216, -0.283617, -6.375035]}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.exteriorStrips_1.geometry}
-            material={materials.bloom1}
-            material-emissiveIntensity={6}
-            material-toneMapped={false}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.exteriorStrips_2.geometry}
-            material={materials.bloom1}
-            material-emissiveIntensity={6}
-            material-toneMapped={false}
-          />
-        </group>
-        <group position={[-0.706465, -0.283617, -6.375035]}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.interiorStrips_1.geometry}
-            material={materials.bloom1}
-            material-emissiveIntensity={6}
-            material-toneMapped={false}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.interiorStrips_2.geometry}
-            material={materials.bloom1}
-            material-emissiveIntensity={6}
-            material-toneMapped={false}
-          />
-        </group>
-        <group
-          position={[2.689634, 6.237738, -0.138753]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={[0.65089, 0.994895, 0.65089]}
-        >
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.corridorMetal_1.geometry}
-            material={materials.mat2}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.corridorMetal_2.geometry}
-            material={materials.mat3}
-            material-roughness={0.7}
-          />
-        </group>
-        <group
-          position={[6.074774, -0.283618, 22.304003]}
-          rotation={[-Math.PI / 2, 0, 0]}
-          scale={-1}
-        >
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.pillars_1.geometry}
-            material={materials.mat2}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.pillars_2.geometry}
-            material={materials.bloom}
-            material-emissiveIntensity={6}
-            material-toneMapped={false}
-          />
-        </group>
+    <group rotation={rotation} position={position} dispose={null}>
+      <group position={[-0.673, -0.284, -6.375]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.exteriorStrips_1.geometry}
+          material={materials.bloom1}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.exteriorStrips_2.geometry}
+          material={materials.mat2}
+        />
+      </group>
+      <group position={[-0.706, -0.284, -6.375]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.interiorStrips_1.geometry}
+          material={materials.mat2}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.interiorStrips_2.geometry}
+          material={materials.bloom1}
+        />
+      </group>
+      <group name="corridor" position={[2.69, 6.238, -0.139]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.corridorMetal_1.geometry}
+          material={materials.mat2}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.corridorMetal_2.geometry}
+          material={materials.mat3}
+        />
+      </group>
+      <group name="pillars" position={[6.075, -0.284, 22.304]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.pillars_1.geometry}
+          material={materials.mat2}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.pillars_2.geometry}
+          material={materials.bloom}
+        />
+      </group>
+      <group name="kiosk" visible={true}>
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.kiosk_screen.geometry}
           material={materials["kiosk.001"]}
-          position={[4.868323, -0.370802, 23.230242]}
-          rotation={[Math.PI, -0.891175, Math.PI]}
-          scale={2.399242}
+          position={[4.868, -0.371, 23.23]}
         />
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.kiosk.geometry}
           material={materials.metal}
-          position={[4.868323, -0.370802, 23.230242]}
-          rotation={[Math.PI, -0.891175, Math.PI]}
-          scale={2.399242}
+          position={[4.868, -0.371, 23.23]}
         />
+      </group>
+      <group position={[-0.706, -0.284, -6.375]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.interiorStrips001.geometry}
+          material={materials.bloom1}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.interiorStrips001_1.geometry}
+          material={materials.bloom1}
+        />
+      </group>
+      <group position={[-0.706, -0.284, -6.375]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.interiorStrips002.geometry}
+          material={materials.mat2}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.interiorStrips002_1.geometry}
+          material={materials.bloom1}
+        />
+      </group>
+      <group name="doors">
         <group
-          position={[2.416499, 1.802009, 24.92848]}
+          position={[2.416, 1.802, 24.928]}
           rotation={[Math.PI / 2, 0, 0]}
-          scale={[9.585181, 0.035026, 9.585181]}
+          scale={[9.585, 0.035, 9.585]}
         >
           <mesh
             castShadow
@@ -156,8 +168,6 @@ export function Corridor({ rotation, position }: CorridorProps) {
             receiveShadow
             geometry={nodes.door_2.geometry}
             material={materials.bloom1}
-            material-emissiveIntensity={6}
-            material-toneMapped={false}
           />
         </group>
         <mesh
@@ -165,14 +175,14 @@ export function Corridor({ rotation, position }: CorridorProps) {
           receiveShadow
           geometry={nodes.door11.geometry}
           material={materials.mat2}
-          position={[2.416499, 1.818744, 24.988642]}
+          position={[1.511, 1.819, 24.989]}
           rotation={[Math.PI / 2, 0, 0]}
-          scale={[9.585181, 0.035026, 9.585181]}
+          scale={[2.71, 1, 1]}
         />
         <group
-          position={[2.797082, 1.802009, -3.80169]}
+          position={[2.797, 1.802, -3.802]}
           rotation={[Math.PI / 2, 0, Math.PI]}
-          scale={[9.585181, 0.035026, 9.585181]}
+          scale={[9.585, 0.035, 9.585]}
         >
           <mesh
             castShadow
@@ -185,14 +195,12 @@ export function Corridor({ rotation, position }: CorridorProps) {
             receiveShadow
             geometry={nodes.door2Left_2.geometry}
             material={materials.bloom1}
-            material-emissiveIntensity={6}
-            material-toneMapped={false}
           />
         </group>
         <group
-          position={[2.797082, 1.802009, -3.80169]}
+          position={[2.797, 1.802, -3.802]}
           rotation={[Math.PI / 2, 0, Math.PI]}
-          scale={[9.585181, 0.035026, 9.585181]}
+          scale={[9.585, 0.035, 9.585]}
         >
           <mesh
             castShadow
@@ -205,12 +213,19 @@ export function Corridor({ rotation, position }: CorridorProps) {
             receiveShadow
             geometry={nodes.door2Right_2.geometry}
             material={materials.bloom1}
-            material-emissiveIntensity={6}
-            material-toneMapped={false}
           />
         </group>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.door1002.geometry}
+          material={materials.mat2}
+          position={[1.742, 1.819, -4.117]}
+          rotation={[Math.PI / 2, 0, 0]}
+          scale={[2.71, 1, 1]}
+        />
       </group>
-    </RigidBody>
+    </group>
   );
 }
 

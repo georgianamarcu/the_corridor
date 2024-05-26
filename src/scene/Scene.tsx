@@ -5,7 +5,6 @@ import Effects from "./Effects";
 import { useKeyboardControls, PointerLockControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
-import { Physics } from "@react-three/rapier";
 
 const Scene = () => {
   const [, get] = useKeyboardControls();
@@ -17,7 +16,7 @@ const Scene = () => {
 
     const forwardVec = new Vector3();
     const rightVec = new Vector3();
-    const speed = 0.05;
+    const speed = 0.1;
 
     state.camera.getWorldDirection(forwardVec);
     forwardVec.y = 0;
@@ -56,9 +55,7 @@ const Scene = () => {
   return (
     <>
       <Suspense fallback={null}>
-        <Physics>
-          <Corridor rotation={[0, -Math.PI, 0]} position={[2.4, -2.6, 2]} />
-        </Physics>
+        <Corridor rotation={[0, -Math.PI, 0]} position={[3, -2.6, 2]} />
       </Suspense>
       <Lights />
       <Effects />
