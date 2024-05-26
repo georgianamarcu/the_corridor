@@ -2,14 +2,15 @@ import { Canvas } from "@react-three/fiber";
 import MainOverlayContainer from "./overlay/MainOverlayContainer";
 import Scene from "./scene/Scene";
 import { KeyboardControls } from "@react-three/drei";
-import { Perf } from "r3f-perf";
-import Cursor from "./overlay/Cursor";
+// import { Perf } from "r3f-perf";
+// import Cursor from "./overlay/Cursor";
+import React from "react";
 
-function App() {
+function App(): React.FC {
   return (
     <>
       <MainOverlayContainer />
-      <Cursor />
+      {/* <Cursor /> */}
       <KeyboardControls
         map={[
           { name: "forward", keys: ["ArrowUp", "KeyW"] },

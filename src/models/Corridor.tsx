@@ -2,6 +2,7 @@ import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import * as THREE from "three";
 import { Euler, Vector3 } from "@react-three/fiber";
+import React from "react";
 
 type GLTFResults = GLTF & {
   nodes: {
@@ -15,6 +16,10 @@ type GLTFResults = GLTF & {
     pillars_2: THREE.Mesh;
     kiosk_screen: THREE.Mesh;
     kiosk: THREE.Mesh;
+    interiorStrips001: THREE.Mesh;
+    interiorStrips001_1: THREE.Mesh;
+    interiorStrips002: THREE.Mesh;
+    interiorStrips002_1: THREE.Mesh;
     door_1: THREE.Mesh;
     door_2: THREE.Mesh;
     door2Left_1: THREE.Mesh;
@@ -22,6 +27,7 @@ type GLTFResults = GLTF & {
     door2Right_1: THREE.Mesh;
     door2Right_2: THREE.Mesh;
     door11: THREE.Mesh;
+    door1002: THREE.Mesh;
   };
   materials: {
     white_bloom: THREE.MeshStandardMaterial;
@@ -39,7 +45,7 @@ interface CorridorProps {
   position: Vector3;
 }
 
-export function Corridor({ rotation, position }: CorridorProps) {
+export function Corridor({ rotation, position }: CorridorProps): React.FC {
   const { nodes, materials } = useGLTF("/corridor.glb") as GLTFResults;
 
   materials.mat3.envMapIntensity = 2;

@@ -6,7 +6,7 @@ interface HealthContainerProps {
   $active: boolean;
 }
 
-const MainOverlayContainer = () => {
+const MainOverlayContainer: React.FC = () => {
   useEffect(() => {
     const chartDom = document.getElementById("gauge");
     const myChart = echarts.init(chartDom);
