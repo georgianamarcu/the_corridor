@@ -2,14 +2,14 @@ import { Canvas } from "@react-three/fiber";
 import MainOverlayContainer from "./overlay/MainOverlayContainer";
 import Scene from "./scene/Scene";
 import { KeyboardControls } from "@react-three/drei";
-// import { Perf } from "r3f-perf";
-// import Cursor from "./overlay/Cursor";
+import Cursor from "./overlay/Cursor";
+import styled from "styled-components";
 
 function App() {
   return (
     <>
       <MainOverlayContainer />
-      {/* <Cursor /> */}
+      <Cursor />
       <KeyboardControls
         map={[
           { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -19,9 +19,12 @@ function App() {
           { name: "jump", keys: ["Space"] },
         ]}
       >
-        <Canvas gl={{ antialias: false, stencil: false }} camera={{ fov: 80 }}>
+        <Canvas
+          dpr={[1, 2]}
+          gl={{ antialias: false, stencil: false }}
+          camera={{ fov: 80 }}
+        >
           <Scene />
-          {/* <Perf /> */}
         </Canvas>
       </KeyboardControls>
     </>

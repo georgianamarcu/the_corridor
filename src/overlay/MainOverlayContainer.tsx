@@ -1,13 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import * as echarts from "echarts";
-
+import LoadingScreen from "./LoadingScreen";
+import { useProgress } from "@react-three/drei";
+import gsap from "gsap";
 interface HealthContainerProps {
   $active: boolean;
 }
 
 const MainOverlayContainer = () => {
+  const loadingScreenRef = useRef();
+  const { progress } = useProgress();
+
   useEffect(() => {
+    if (progress === 100) {
+      gsap.to(loadingScreenRef.current, {
+        opacity: 0,
+        duration: 1,
+        onComplete: () => {
+          loadingScreenRef.current.style.display = "none";
+        },
+      });
+    }
+  }, [progress]);
+
+  useEffect(() => {
+    //Gauge
     const chartDom = document.getElementById("gauge");
     const myChart = echarts.init(chartDom);
     const option = {
@@ -176,10 +194,12 @@ const MainOverlayContainer = () => {
       </Div>
       <HealthContainer>
         {Array.from({ length: 12 }, (_, index) => (
-          <Rectangle key={index} $active={index < 10} />
+          <Rectangle key={index} $active={index < 8} />
         ))}
       </HealthContainer>
-      <HealthText>80</HealthText>
+      <HealthText>70</HealthText>
+      <SVGElement />
+      <LoadingScreen ref={loadingScreenRef} />
     </>
   );
 };
@@ -192,21 +212,21 @@ const Div = styled.div`
   height: 250px;
   z-index: 999;
   left: 50px;
-  bottom: 50px;
-  perspective: 800px;
+  top: 50px;
+  perspective: 900px;
 `;
 
 const Container = styled.div`
   width: 300px;
   height: 250px;
-  background: rgba(0, 255, 255, 0.1);
+  background: rgba(0, 255, 255, 0.2);
   opacity: 0.9;
-  border: 1px solid rgba(0, 255, 255, 0.4);
+  border: 1px solid rgba(0, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   border-radius: 5px;
   padding: 20px;
   position: relative;
-  transform: rotateY(10deg) rotateX(20deg);
+  transform: rotateY(30deg) rotateX(-20deg);
   transform-style: preserve-3d;
   box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
 
@@ -217,7 +237,7 @@ const Container = styled.div`
     left: -10px;
     right: -10px;
     bottom: -10px;
-    border: 1px solid rgba(0, 255, 255, 0.4);
+    border: 1px solid rgba(0, 255, 255, 0.9);
     opacity: 0.7;
     border-radius: 5px;
     z-index: -1;
@@ -270,7 +290,7 @@ const Container = styled.div`
 
   & .screen-overlay {
     background: linear-gradient(
-      rgba(0, 255, 255, 0.15),
+      rgba(0, 255, 255, 0.3),
       transparent 2px,
       transparent 3px,
       transparent 2px
@@ -427,7 +447,7 @@ const HealthContainer = styled.div`
   right: 2%;
   bottom: 5%;
   z-index: 9999;
-  border: 1px solid rgba(0, 255, 255, 0.9);
+  border: 1px solid rgba(0, 255, 255, 0.8);
   border-radius: 5px;
   padding: 5px;
   display: flex;
@@ -441,14 +461,27 @@ const Rectangle = styled.div<HealthContainerProps>`
   width: 4px;
   height: 100%;
   background-color: ${(props) =>
-    props.$active ? "rgba(0, 255, 255, 0.9)" : "rgba(0, 255, 255, 0.3)"};
+    props.$active ? "rgba(0, 255, 255, 0.8)" : "rgba(0, 255, 255, 0.3)"};
 `;
 
 const HealthText = styled.p`
   position: absolute;
   z-index: 999;
-  color: rgba(0, 255, 255, 0.9);
+  color: rgba(0, 255, 255, 0.8);
   font-size: 60px;
   right: 10%;
   bottom: 3.5%;
+`;
+
+const SVGElement = styled.div`
+  width: 50%;
+  height: 100px;
+  position: absolute;
+  z-index: 999;
+  bottom: 0;
+  left: 25%;
+  background-image: url("/element.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 `;

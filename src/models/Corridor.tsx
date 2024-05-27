@@ -112,14 +112,16 @@ export function Corridor({ rotation, position }: CorridorProps) {
           material={materials.bloom}
         />
       </group>
-      <group name="kiosk" visible={true}>
+      <group name="kiosk" visible={false}>
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.kiosk_screen.geometry}
           material={materials["kiosk.001"]}
+          material-side={THREE.DoubleSide}
           position={[4.868, -0.371, 23.23]}
-        />
+          name="kiosk-screen"
+        ></mesh>
         <mesh
           castShadow
           receiveShadow

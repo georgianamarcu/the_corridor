@@ -4,6 +4,7 @@ import {
   Bloom,
   N8AO,
   Scanline,
+  Vignette,
 } from "@react-three/postprocessing";
 import { LUTCubeLoader, BlendFunction } from "postprocessing";
 import { useLoader } from "@react-three/fiber";
@@ -20,6 +21,12 @@ const Effects = () => {
         intensity={0.8}
       />
       <LUT lut={texture} />
+      <Vignette
+        offset={0.6}
+        darkness={0.7}
+        eskil={false}
+        blendFunction={BlendFunction.ALPHA}
+      />
       <N8AO
         intensity={2.1}
         aoRadius={0.9}
