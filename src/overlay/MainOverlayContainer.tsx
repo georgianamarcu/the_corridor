@@ -9,7 +9,7 @@ interface HealthContainerProps {
 }
 
 const MainOverlayContainer = () => {
-  const loadingScreenRef = useRef();
+  const loadingScreenRef = useRef<HTMLDivElement | null>(null);
   const { progress } = useProgress();
 
   useEffect(() => {
