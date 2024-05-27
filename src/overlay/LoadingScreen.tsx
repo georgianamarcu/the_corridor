@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import SVG from "./SVG";
-import React from "react";
+import React, { forwardRef } from "react";
 
-const LoadingScreen = React.forwardRef((props, ref) => (
-  <LoadingContainer {...props} ref={ref}>
-    <SVG />
-    <LoadingText>LOADING</LoadingText>
-  </LoadingContainer>
-));
+interface LoadingScreenProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const LoadingScreen = forwardRef<HTMLDivElement, LoadingScreenProps>(
+  (props, ref) => (
+    <LoadingContainer {...props} ref={ref}>
+      <SVG />
+      <LoadingText>LOADING</LoadingText>
+    </LoadingContainer>
+  )
+);
 
 export const LoadingContainer = styled.div`
   position: absolute;
@@ -34,4 +38,5 @@ const LoadingText = styled.p`
   font-size: 20px;
   color: #00ffff;
 `;
+
 export default LoadingScreen;
