@@ -4,25 +4,37 @@ import * as echarts from "echarts";
 import LoadingScreen from "./LoadingScreen";
 import { useProgress } from "@react-three/drei";
 import gsap from "gsap";
+import Cursor from "./Cursor";
 interface HealthContainerProps {
   $active: boolean;
 }
 
 const MainOverlayContainer = () => {
   const loadingScreenRef = useRef<HTMLDivElement | null>(null);
+  const uiRef = useRef<HTMLDivElement | null>(null);
   const { progress } = useProgress();
 
   useEffect(() => {
-    if (loadingScreenRef.current && progress === 100) {
-      gsap.to(loadingScreenRef.current, {
-        opacity: 0,
-        duration: 1,
-        onComplete: () => {
-          if (loadingScreenRef.current) {
-            loadingScreenRef.current.style.display = "none";
-          }
-        },
-      });
+    if (loadingScreenRef.current && uiRef.current && progress === 100) {
+      gsap
+        .timeline()
+        .to(loadingScreenRef.current, {
+          opacity: 0,
+          duration: 1,
+          onComplete: () => {
+            if (loadingScreenRef.current) {
+              loadingScreenRef.current.style.display = "none";
+            }
+          },
+        })
+        .to(
+          uiRef.current,
+          {
+            opacity: 1,
+            duration: 1,
+          },
+          "-=0.5"
+        );
     }
   }, [progress]);
 
@@ -180,27 +192,30 @@ const MainOverlayContainer = () => {
 
   return (
     <>
-      <Div>
-        <Container>
-          <div className="corner-cut top-left"></div>
-          <div className="corner-cut top-right"></div>
-          <div className="corner-cut bottom-left"></div>
-          <div className="corner-cut bottom-right"></div>
-          <div className="screen-overlay"></div>
-          <div className="text-container">
-            <p className="main-text skew">RADIATION LEVEL</p>
-            <p className="back-text glitch">RADIATION LEVEL</p>
-          </div>
-          <Gauge id="gauge" />
-        </Container>
-      </Div>
-      <HealthContainer>
-        {Array.from({ length: 12 }, (_, index) => (
-          <Rectangle key={index} $active={index < 8} />
-        ))}
-      </HealthContainer>
-      <HealthText>70</HealthText>
-      <SVGElement />
+      <div ref={uiRef} style={{ opacity: 1 }}>
+        <Div>
+          <Container>
+            <div className="corner-cut top-left"></div>
+            <div className="corner-cut top-right"></div>
+            <div className="corner-cut bottom-left"></div>
+            <div className="corner-cut bottom-right"></div>
+            <div className="screen-overlay"></div>
+            <div className="text-container">
+              <p className="main-text skew">RADIATION LEVEL</p>
+              <p className="back-text glitch">RADIATION LEVEL</p>
+            </div>
+            <Gauge id="gauge" />
+          </Container>
+        </Div>
+        <HealthContainer>
+          {Array.from({ length: 12 }, (_, index) => (
+            <Rectangle key={index} $active={index < 8} />
+          ))}
+        </HealthContainer>
+        <HealthText>70</HealthText>
+        <SVGElement />
+        <Cursor />
+      </div>
       <LoadingScreen ref={loadingScreenRef} />
     </>
   );

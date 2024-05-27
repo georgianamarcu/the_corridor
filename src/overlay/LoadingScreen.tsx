@@ -21,6 +21,7 @@ export const LoadingContainer = styled.div`
   background-image: url("/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  opacity: 1;
   &::after {
     content: "";
     position: absolute;
