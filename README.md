@@ -2,7 +2,7 @@
 
 This project is part of a UI challenge for Bruno Simon's project. It showcases a futuristic corridor inspired by video games, incorporating smooth animations and modern web technologies.
 
-![Screenshot]("https://res.cloudinary.com/dpwjzdw4u/image/upload/v1716773736/Screenshot_2024-05-27_at_03.34.57_dwpitv.png")
+![Screenshot](https://res.cloudinary.com/dpwjzdw4u/image/upload/v1716773736/Screenshot_2024-05-27_at_03.34.57_dwpitv.png)
 
 ## Table of Contents
 
