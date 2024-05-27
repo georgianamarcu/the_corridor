@@ -3,7 +3,6 @@ import MainOverlayContainer from "./overlay/MainOverlayContainer";
 import Scene from "./scene/Scene";
 import { KeyboardControls } from "@react-three/drei";
 import Cursor from "./overlay/Cursor";
-import styled from "styled-components";
 
 function App() {
   return (

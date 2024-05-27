@@ -13,7 +13,7 @@ const MainOverlayContainer = () => {
   const { progress } = useProgress();
 
   useEffect(() => {
-    if (progress === 100) {
+    if (loadingScreenRef.current && progress === 100) {
       gsap.to(loadingScreenRef.current, {
         opacity: 0,
         duration: 1,

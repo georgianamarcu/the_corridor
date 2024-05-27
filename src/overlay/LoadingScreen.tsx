@@ -3,7 +3,7 @@ import SVG from "./SVG";
 import React from "react";
 
 const LoadingScreen = React.forwardRef((props, ref) => (
-  <LoadingContainer ref={ref}>
+  <LoadingContainer {...props} ref={ref}>
     <SVG />
     <LoadingText>LOADING</LoadingText>
   </LoadingContainer>
