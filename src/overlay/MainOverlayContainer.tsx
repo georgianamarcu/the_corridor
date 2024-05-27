@@ -18,7 +18,9 @@ const MainOverlayContainer = () => {
         opacity: 0,
         duration: 1,
         onComplete: () => {
-          loadingScreenRef.current.style.display = "none";
+          if (loadingScreenRef.current) {
+            loadingScreenRef.current.style.display = "none";
+          }
         },
       });
     }
