@@ -16,25 +16,27 @@ const MainOverlayContainer = () => {
 
   useEffect(() => {
     if (loadingScreenRef.current && uiRef.current && progress === 100) {
-      gsap
-        .timeline()
-        .to(loadingScreenRef.current, {
-          opacity: 0,
-          duration: 1,
-          onComplete: () => {
-            if (loadingScreenRef.current) {
-              loadingScreenRef.current.style.display = "none";
-            }
-          },
-        })
-        .to(
-          uiRef.current,
-          {
-            opacity: 1,
+      setTimeout(() => {
+        gsap
+          .timeline()
+          .to(loadingScreenRef.current, {
+            opacity: 0,
             duration: 1,
-          },
-          "-=0.5"
-        );
+            onComplete: () => {
+              if (loadingScreenRef.current) {
+                loadingScreenRef.current.style.display = "none";
+              }
+            },
+          })
+          .to(
+            uiRef.current,
+            {
+              opacity: 1,
+              duration: 1,
+            },
+            "-=0.5"
+          );
+      }, 3000);
     }
   }, [progress]);
 
@@ -192,7 +194,7 @@ const MainOverlayContainer = () => {
 
   return (
     <>
-      <div ref={uiRef} style={{ opacity: 1 }}>
+      <div ref={uiRef} style={{ opacity: 0 }}>
         <Div>
           <Container>
             <div className="corner-cut top-left"></div>
@@ -227,7 +229,7 @@ const Div = styled.div`
   position: absolute;
   width: 300px;
   height: 250px;
-  z-index: 999;
+  z-index: 99;
   left: 50px;
   top: 50px;
   perspective: 900px;
@@ -463,7 +465,7 @@ const HealthContainer = styled.div`
   position: absolute;
   right: 2%;
   bottom: 5%;
-  z-index: 9999;
+  z-index: 99;
   border: 1px solid rgba(0, 255, 255, 0.8);
   border-radius: 5px;
   padding: 5px;
@@ -483,7 +485,7 @@ const Rectangle = styled.div<HealthContainerProps>`
 
 const HealthText = styled.p`
   position: absolute;
-  z-index: 999;
+  z-index: 99;
   color: rgba(0, 255, 255, 0.8);
   font-size: 60px;
   right: 10%;
@@ -494,7 +496,7 @@ const SVGElement = styled.div`
   width: 50%;
   height: 100px;
   position: absolute;
-  z-index: 999;
+  z-index: 99;
   bottom: 0;
   left: 25%;
   background-image: url("/element.svg");

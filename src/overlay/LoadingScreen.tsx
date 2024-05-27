@@ -15,7 +15,7 @@ const LoadingScreen = forwardRef<HTMLDivElement, LoadingScreenProps>(
 
 export const LoadingContainer = styled.div`
   position: absolute;
-  z-index: 9999;
+  z-index: 999;
   height: 100vh;
   width: 100vw;
   background-image: url("/background.jpg");
