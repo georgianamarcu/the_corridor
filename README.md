@@ -1,3 +1,5 @@
+# WORK IN PROGRESS!!
+
 # Futuristic UI Challenge - Corridor Inspired by Video Games
 
 This project is part of a UI challenge for Bruno Simon's project. It showcases a futuristic corridor inspired by video games, incorporating smooth animations and modern web technologies.
